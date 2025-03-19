@@ -1,6 +1,6 @@
+import { Event } from "@/types";
 import Card from "@/components/Card";
 import { EventService } from "@/services";
-import { Event } from "@/types";
 
 import { useEffect, useState } from "react";
 import {
@@ -10,8 +10,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useNavigation } from "expo-router";
 
 export default function Index() {
+  const navigation = useNavigation();
   const [events, setEvents] = useState<Event[]>([]);
 
   const renderProductItem = ({ item }: { item: Event }) => <Card item={item} />;
@@ -25,6 +27,8 @@ export default function Index() {
     fetchEvents();
   }, []);
 
+  const goToCheckout = () => navigation.navigate("checkout" as never);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -34,7 +38,7 @@ export default function Index() {
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 100 }}
       />
-      <TouchableOpacity style={styles.continueButton}>
+      <TouchableOpacity style={styles.continueButton} onPress={goToCheckout}>
         <Text style={styles.continueButtonText}>Go to checkout</Text>
       </TouchableOpacity>
     </View>
