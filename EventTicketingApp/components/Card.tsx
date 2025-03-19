@@ -13,11 +13,19 @@ const Card: React.FC<Props> = ({ item }) => {
   const onIncrement = () => setAmount((prevValue) => prevValue + 1);
   const onDecrement = () => setAmount((prevValue) => prevValue - 1);
 
-  const isDecrementDisable = amount === 0;
-  const isIncrementDisable = amount === item.numberOfTickets;
+  const isSoldOut = item.numberOfTickets === 0;
+  const isDecrementDisable = amount === 0 || isSoldOut;
+  const isIncrementDisable = amount === item.numberOfTickets || isSoldOut;
 
   return (
     <View style={styles.container}>
+      {isSoldOut && (
+        <View style={styles.soldOutContainer}>
+          <Text style={{ ...styles.productPriceText, color: "white" }}>
+            SOLD OUT
+          </Text>
+        </View>
+      )}
       <View style={styles.productCard}>
         <View style={styles.productInfo}>
           <Text style={styles.productName}>{item.name}</Text>
@@ -62,6 +70,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   container: {
+    position: "relative",
     backgroundColor: "#fff",
     borderRadius: 8,
     shadowColor: "#000",
@@ -70,6 +79,15 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     padding: 16,
     marginBottom: 16,
+  },
+  soldOutContainer: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    backgroundColor: "#f64f6bbe",
   },
   productCard: {
     flexDirection: "row",
