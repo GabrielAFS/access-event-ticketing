@@ -1,4 +1,4 @@
-import mockData from "@/constants/MOCK_DATA.json";
+import mockData from "@/constants/events_mock_data";
 
 export class EventService {
   static async list() {
