@@ -6,3 +6,7 @@ export interface Event {
   numberOfTickets: number;
   price: number;
 }
+
+export interface EventCheckout extends Event {
+  amount: number;
+}
