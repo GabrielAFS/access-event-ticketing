@@ -1,21 +1,25 @@
+import useCheckout from "@/hooks/useCheckout";
 import { Event } from "@/types";
 
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 interface Props {
   item: Event;
 }
 
+// TODO: Create a reusable Card ui component
 const Card: React.FC<Props> = ({ item }) => {
-  const [amount, setAmount] = useState<number>(0);
+  const { addEventTicket, removeEventTicket, getEventTicketAmount } =
+    useCheckout();
 
-  const onIncrement = () => setAmount((prevValue) => prevValue + 1);
-  const onDecrement = () => setAmount((prevValue) => prevValue - 1);
-
+  const amount = getEventTicketAmount(item.id);
   const isSoldOut = item.numberOfTickets === 0;
   const isDecrementDisable = amount === 0 || isSoldOut;
   const isIncrementDisable = amount === item.numberOfTickets || isSoldOut;
+
+  const onIncrement = () => addEventTicket(item);
+  const onDecrement = () => removeEventTicket(item.id);
 
   return (
     <View style={styles.container}>
