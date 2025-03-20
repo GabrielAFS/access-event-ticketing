@@ -1,8 +1,11 @@
-import useCheckout from "@/hooks/useCheckout";
 import { Event } from "@/types";
+import useCheckout from "@/hooks/useCheckout";
+import { RootStackParamList } from "@/types/navigation";
 
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
+import { useNavigation } from "expo-router";
 
 interface Props {
   item: Event;
@@ -10,16 +13,15 @@ interface Props {
 
 // TODO: Create a reusable Card ui component
 const Card: React.FC<Props> = ({ item }) => {
-  const { addEventTicket, removeEventTicket, getEventTicketAmount } =
-    useCheckout();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const { setSelectedEvent } = useCheckout();
 
-  const amount = getEventTicketAmount(item.id);
   const isSoldOut = item.numberOfTickets === 0;
-  const isDecrementDisable = amount === 0 || isSoldOut;
-  const isIncrementDisable = amount === item.numberOfTickets || isSoldOut;
 
-  const onIncrement = () => addEventTicket(item);
-  const onDecrement = () => removeEventTicket(item.id);
+  const handlePress = () => {
+    setSelectedEvent(item);
+    navigation.navigate("details");
+  };
 
   return (
     <View style={styles.container}>
@@ -30,42 +32,21 @@ const Card: React.FC<Props> = ({ item }) => {
           </Text>
         </View>
       )}
-      <View style={styles.productCard}>
-        <View style={styles.productInfo}>
-          <Text style={styles.productName}>{item.name}</Text>
-          <Text style={styles.productDescription}>{item.description}</Text>
+      <Pressable onPress={handlePress}>
+        <View style={styles.productCard}>
+          <View style={styles.productInfo}>
+            <Text style={styles.productName}>{item.name}</Text>
+            <Text style={styles.productDescription}>{item.description}</Text>
+          </View>
         </View>
-        <View style={styles.productAmount}>
-          <TouchableOpacity
-            style={{
-              ...styles.amountButton,
-              opacity: isDecrementDisable ? 0.5 : 1,
-            }}
-            onPress={onDecrement}
-            disabled={isDecrementDisable}
-          >
-            <Text style={styles.amountButtonText}>-</Text>
-          </TouchableOpacity>
-          <Text style={styles.amountText}>{amount}</Text>
-          <TouchableOpacity
-            style={{
-              ...styles.amountButton,
-              opacity: isIncrementDisable ? 0.5 : 1,
-            }}
-            onPress={onIncrement}
-            disabled={isIncrementDisable}
-          >
-            <Text style={styles.amountButtonText}>+</Text>
-          </TouchableOpacity>
+        <View style={styles.footer}>
+          <Text style={styles.productPrice}>
+            {item.numberOfTickets}{" "}
+            <Text style={styles.productPriceText}>tickets available</Text>
+          </Text>
+          <Text style={styles.productPriceText}>{item.date}</Text>
         </View>
-      </View>
-      <View style={styles.footer}>
-        <Text style={styles.productPrice}>
-          ${item.price.toFixed(2)}{" "}
-          <Text style={styles.productPriceText}>per item</Text>
-        </Text>
-        <Text style={styles.productPriceText}>{item.date}</Text>
-      </View>
+      </Pressable>
     </View>
   );
 };
@@ -81,7 +62,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
-    padding: 16,
+    paddingVertical: 24,
+    paddingHorizontal: 16,
     marginBottom: 16,
   },
   soldOutContainer: {

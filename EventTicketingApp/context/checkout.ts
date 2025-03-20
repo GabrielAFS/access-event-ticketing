@@ -1,12 +1,11 @@
-import { Event, EventCheckout } from "@/types";
+import { Event } from "@/types";
 import { createContext } from "react";
 
 interface CheckoutProps {
-  events: Map<number, EventCheckout>;
-  addEventTicket: (event: Event) => void;
-  removeEventTicket: (id: number) => void;
-  getEventTicketAmount: (id: number) => number;
-  getEventsAsArray: () => EventCheckout[];
+  selectedEvent: Event | null;
+
+  setSelectedEvent: React.Dispatch<React.SetStateAction<Event | null>>;
+  purchaseTickets: (amount: number, id: number) => Promise<void>;
 }
 
 const initialValue = {} as CheckoutProps;
