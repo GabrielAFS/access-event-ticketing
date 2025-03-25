@@ -23,9 +23,24 @@ export default function RootLayout() {
             headerTitleAlign: "center",
           }}
         >
-          <Stack.Screen name='index' />
-          <Stack.Screen name='details' />
-          <Stack.Screen name='success_purchase' />
+          <Stack.Screen
+            name='index'
+            options={{
+              title: "Home",
+            }}
+          />
+          <Stack.Screen
+            name='details'
+            options={{
+              title: "Event Details",
+            }}
+          />
+          <Stack.Screen
+            name='success_purchase'
+            options={{
+              headerShown: false,
+            }}
+          />
         </Stack>
       </CheckoutProvider>
     </ApolloProvider>
