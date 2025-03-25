@@ -1,35 +1,42 @@
 import Button from "@/components/Button";
-import { Colors } from "@/constants/Colors";
 import useCheckout from "@/hooks/useCheckout";
 import { RootStackParamList } from "@/types/navigation";
 
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, Image, TextStyle } from "react-native";
 import { NavigationProp } from "@react-navigation/core";
 import { useNavigation } from "expo-router";
+
+import styles from "./styles";
 
 const SuccessPurchaseScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { purchasedOrder } = useCheckout();
 
+  const valueStyles: TextStyle = {
+    ...styles.textBold,
+    fontSize: 18,
+    marginBottom: 0,
+  };
+
   return (
-    <View style={styles.container}>
+    <View style={styles.containerStartAlignedCenter}>
       <Image
         source={require("@/assets/images/checkmark-icon.png")}
-        style={styles.banner}
+        style={styles.image}
       />
-      <Text style={styles.title}>Purchase Successful!</Text>
-      <View style={styles.infoContainer}>
-        <Text style={styles.label}>Order Number:</Text>
-        <Text style={styles.value}>{purchasedOrder?.code}</Text>
+      <Text style={styles.greenTitle}>Purchase Successful!</Text>
+      <View style={styles.colAlignedCenter}>
+        <Text style={styles.textMedium}>Order Number:</Text>
+        <Text style={valueStyles}>{purchasedOrder?.code}</Text>
       </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.label}>Event Details:</Text>
-        <Text style={styles.value}>{purchasedOrder?.event.name}</Text>
+      <View style={styles.colAlignedCenter}>
+        <Text style={styles.textMedium}>Event Details:</Text>
+        <Text style={valueStyles}>{purchasedOrder?.event.name}</Text>
       </View>
-      <View style={styles.infoContainer}>
-        <Text style={styles.label}>Tickets Purchased:</Text>
-        <Text style={styles.value}>{purchasedOrder?.numberOfTickets}</Text>
+      <View style={styles.colAlignedCenter}>
+        <Text style={styles.textMedium}>Tickets Purchased:</Text>
+        <Text style={valueStyles}>{purchasedOrder?.numberOfTickets}</Text>
       </View>
 
       <Button
@@ -39,54 +46,5 @@ const SuccessPurchaseScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: Colors.background,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: Colors.primary,
-  },
-  infoContainer: {
-    marginBottom: 15,
-    alignItems: "center",
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: Colors.text,
-  },
-  value: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: Colors.title,
-  },
-  banner: {
-    maxHeight: 300,
-    aspectRatio: 2 / 5,
-    resizeMode: "contain",
-  },
-  continueButton: {
-    position: "absolute",
-    bottom: 16,
-    left: 16,
-    right: 16,
-    backgroundColor: Colors.primary,
-    borderRadius: 8,
-    padding: 16,
-    alignItems: "center",
-  },
-  continueButtonText: {
-    color: Colors.background,
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
 
 export default SuccessPurchaseScreen;
