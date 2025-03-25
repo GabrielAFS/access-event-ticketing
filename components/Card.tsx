@@ -1,4 +1,5 @@
 import { Event } from "@/types";
+import { dateFormat } from "@/utils/date";
 import useCheckout from "@/hooks/useCheckout";
 import { RootStackParamList } from "@/types/navigation";
 
@@ -44,7 +45,9 @@ const Card: React.FC<Props> = ({ item }) => {
             {item.numberOfTickets}{" "}
             <Text style={styles.productPriceText}>tickets available</Text>
           </Text>
-          <Text style={styles.productPriceText}>{item.date}</Text>
+          <Text style={styles.productPriceText}>
+            {dateFormat.format(new Date(item.date))}
+          </Text>
         </View>
       </Pressable>
     </View>
