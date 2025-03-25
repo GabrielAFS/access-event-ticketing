@@ -14,6 +14,14 @@ export default function Checkout() {
   const { selectedEvent } = useCheckout();
   const [ticketQuantity, setTicketQuantity] = useState<number>(0);
 
+  const isSoldOut = selectedEvent?.numberOfTickets === 0;
+  const isDecrementDisable = ticketQuantity === 0 || isSoldOut;
+  const isIncrementDisable =
+    ticketQuantity === selectedEvent?.numberOfTickets || isSoldOut;
+
+  const onIncrement = () => setTicketQuantity((prevValue) => prevValue + 1);
+  const onDecrement = () => setTicketQuantity((prevValue) => prevValue - 1);
+
   return (
     <View style={styles.container}>
       {/* Image Banner */}
@@ -38,13 +46,35 @@ export default function Checkout() {
 
         {/* Ticket Quantity Input */}
         <Text style={styles.ticketLabel}>Number of Tickets:</Text>
-        <TextInput
-          style={styles.ticketInput}
-          keyboardType='numeric'
-          placeholder='Enter quantity'
-          value={ticketQuantity.toString()}
-          onChangeText={(value) => setTicketQuantity(Number(value))}
-        />
+        <View style={styles.productAmount}>
+          <TouchableOpacity
+            style={{
+              ...styles.amountButton,
+              opacity: isDecrementDisable ? 0.5 : 1,
+            }}
+            onPress={onDecrement}
+            disabled={isDecrementDisable}
+          >
+            <Text style={styles.amountButtonText}>-</Text>
+          </TouchableOpacity>
+          <TextInput
+            style={styles.ticketInput}
+            keyboardType='numeric'
+            placeholder='Enter quantity'
+            value={ticketQuantity.toString()}
+            onChangeText={(value) => setTicketQuantity(Number(value))}
+          />
+          <TouchableOpacity
+            style={{
+              ...styles.amountButton,
+              opacity: isIncrementDisable ? 0.5 : 1,
+            }}
+            onPress={onIncrement}
+            disabled={isIncrementDisable}
+          >
+            <Text style={styles.amountButtonText}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <TouchableOpacity
@@ -111,10 +141,28 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   ticketInput: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
     padding: 8,
     fontSize: 16,
+  },
+  productAmount: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  amountButton: {
+    width: 30,
+    height: 30,
+    backgroundColor: "#4caf50",
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  amountButtonText: {
+    color: "#fff",
+    fontSize: 18,
+  },
+  amountText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginHorizontal: 16,
   },
 });
