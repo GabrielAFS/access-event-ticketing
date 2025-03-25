@@ -26,13 +26,20 @@ export default function Checkout() {
 
   return (
     <View style={styles.container}>
-      {/* Image Banner */}
-      <Image
-        source={{
-          uri: "https://shakopee.org/wp-content/uploads/2019/09/event-placeholder-e1569596788649.jpg",
-        }}
-        style={styles.banner}
-      />
+      <View>
+        {isSoldOut && (
+          <View style={styles.soldOutContainer}>
+            <Text style={styles.soldOutText}>SOLD OUT</Text>
+          </View>
+        )}
+        {/* Image Banner */}
+        <Image
+          source={{
+            uri: "https://shakopee.org/wp-content/uploads/2019/09/event-placeholder-e1569596788649.jpg",
+          }}
+          style={styles.banner}
+        />
+      </View>
 
       <View style={styles.contentContainer}>
         {/* Event Name */}
@@ -175,5 +182,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginHorizontal: 16,
+  },
+  soldOutContainer: {
+    position: "absolute",
+    right: 10,
+    top: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    backgroundColor: Colors.badge,
+    zIndex: 999,
+  },
+  soldOutText: {
+    fontSize: 16,
+    fontWeight: "normal",
+    color: Colors.background,
   },
 });

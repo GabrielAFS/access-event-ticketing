@@ -3,6 +3,6 @@ export const Colors = {
   text: "#555",
   title: "#11181C",
   background: "#fff",
-  badge: "#f64f6bbe",
+  badge: "#f64f6b",
   black: "#000",
 };
