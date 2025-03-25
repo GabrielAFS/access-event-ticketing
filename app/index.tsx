@@ -22,7 +22,7 @@ export default function Index() {
         style={styles.eventsList}
         renderItem={renderProductItem}
         keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.contentContainerStyle}
+        contentContainerStyle={styles.contentContainer}
       />
     </View>
   );
