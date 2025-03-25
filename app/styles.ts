@@ -14,6 +14,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.background,
   },
+  containerAbsoluteCenter: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.background,
+  },
   contentContainer: { paddingHorizontal: 16, paddingBottom: 100 },
   contentContainerNoPadBottom: {
     paddingHorizontal: 16,
