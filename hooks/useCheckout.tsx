@@ -44,7 +44,7 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
       setSelectedEvent,
       purchaseTickets,
     }),
-    [selectedEvent]
+    [selectedEvent, purchasedOrder]
   );
 
   return (
