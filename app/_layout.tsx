@@ -21,12 +21,15 @@ export default function RootLayout() {
             },
             headerTintColor: Colors.background,
             headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontSize: 24,
+            },
           }}
         >
           <Stack.Screen
             name='index'
             options={{
-              title: "Home",
+              title: "Events",
             }}
           />
           <Stack.Screen
