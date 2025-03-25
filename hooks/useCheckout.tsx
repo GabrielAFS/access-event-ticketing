@@ -7,6 +7,7 @@ import React, { useContext, useMemo, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/core";
+import { Alert } from "react-native";
 
 interface CheckoutProviderProps {
   children: React.ReactNode;
@@ -32,8 +33,7 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
         setPurchasedOrder(data.createOrder);
         navigation.navigate("success_purchase");
       },
-      onError: (error) =>
-        console.log(error.message, error.cause, error.networkError),
+      onError: (error) => Alert.alert(error.name, error.message),
     });
   };
 

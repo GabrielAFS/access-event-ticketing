@@ -28,6 +28,10 @@ export default function Checkout() {
   const onIncrement = () => setTicketQuantity((prevValue) => prevValue + 1);
   const onDecrement = () => setTicketQuantity((prevValue) => prevValue - 1);
 
+  const handleGetTickets = () => {
+    purchaseTickets(ticketQuantity, selectedEvent?.id as number);
+  };
+
   return (
     <KeyboardAvoidingView style={styles.flex} behavior='padding'>
       <View style={styles.container}>
@@ -82,9 +86,7 @@ export default function Checkout() {
         <Button
           title='Get tickets'
           disabled={ticketQuantity < 1}
-          onPress={() =>
-            purchaseTickets(ticketQuantity, selectedEvent?.id as number)
-          }
+          onPress={handleGetTickets}
         />
       </View>
     </KeyboardAvoidingView>
