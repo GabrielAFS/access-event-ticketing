@@ -1,11 +1,12 @@
+import Button from "@/components/Button";
+import { Colors } from "@/constants/Colors";
 import useCheckout from "@/hooks/useCheckout";
 import { RootStackParamList } from "@/types/navigation";
 
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { NavigationProp } from "@react-navigation/core";
 import { useNavigation } from "expo-router";
-import { Colors } from "@/constants/Colors";
 
 const SuccessPurchaseScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -31,12 +32,10 @@ const SuccessPurchaseScreen = () => {
         <Text style={styles.value}>{purchasedOrder?.numberOfTickets}</Text>
       </View>
 
-      <TouchableOpacity
-        style={styles.continueButton}
+      <Button
+        title='Back to Events list'
         onPress={() => navigation.navigate("index")}
-      >
-        <Text style={styles.continueButtonText}>Back to Events list</Text>
-      </TouchableOpacity>
+      />
     </View>
   );
 };

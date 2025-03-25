@@ -1,4 +1,6 @@
+import Button from "@/components/Button";
 import { dateFormat } from "@/utils/date";
+import { Colors } from "@/constants/Colors";
 import useCheckout from "@/hooks/useCheckout";
 
 import { useState } from "react";
@@ -12,7 +14,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import { Colors } from "@/constants/Colors";
 
 export default function Checkout() {
   const { selectedEvent, purchaseTickets } = useCheckout();
@@ -102,15 +103,13 @@ export default function Checkout() {
             </View>
           </View>
         </ScrollView>
-        <TouchableOpacity
-          style={styles.continueButton}
+        <Button
+          title='Get tickets'
           disabled={ticketQuantity < 1}
           onPress={() =>
             purchaseTickets(ticketQuantity, selectedEvent?.id as number)
           }
-        >
-          <Text style={styles.continueButtonText}>Get tickets</Text>
-        </TouchableOpacity>
+        />
       </View>
     </KeyboardAvoidingView>
   );
@@ -129,20 +128,6 @@ const styles = StyleSheet.create({
   productList: {
     flex: 1,
     paddingTop: 16,
-  },
-  continueButton: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: Colors.primary,
-    padding: 16,
-    alignItems: "center",
-  },
-  continueButtonText: {
-    color: Colors.background,
-    fontSize: 18,
-    fontWeight: "bold",
   },
   banner: {
     width: "100%",
