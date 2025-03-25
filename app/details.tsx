@@ -9,6 +9,8 @@ import {
   View,
   Image,
   TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Colors } from "@/constants/Colors";
 
@@ -25,84 +27,98 @@ export default function Checkout() {
   const onDecrement = () => setTicketQuantity((prevValue) => prevValue - 1);
 
   return (
-    <View style={styles.container}>
-      <View>
-        {isSoldOut && (
-          <View style={styles.soldOutContainer}>
-            <Text style={styles.soldOutText}>SOLD OUT</Text>
+    <KeyboardAvoidingView style={styles.flex} behavior='padding'>
+      <View style={styles.container}>
+        <ScrollView style={styles.flex} keyboardDismissMode='interactive'>
+          <View>
+            {isSoldOut && (
+              <View style={styles.soldOutContainer}>
+                <Text style={styles.soldOutText}>SOLD OUT</Text>
+              </View>
+            )}
+            {/* Image Banner */}
+            <Image
+              source={{
+                uri: "https://shakopee.org/wp-content/uploads/2019/09/event-placeholder-e1569596788649.jpg",
+              }}
+              style={styles.banner}
+            />
           </View>
-        )}
-        {/* Image Banner */}
-        <Image
-          source={{
-            uri: "https://shakopee.org/wp-content/uploads/2019/09/event-placeholder-e1569596788649.jpg",
-          }}
-          style={styles.banner}
-        />
+
+          <View style={styles.contentContainer}>
+            {/* Event Name */}
+            <Text style={styles.eventName}>{selectedEvent?.name}</Text>
+
+            {/* Event Description */}
+            <Text style={styles.eventDescription}>
+              {selectedEvent?.description}
+            </Text>
+
+            {/* Event Date */}
+            <Text style={styles.eventDate}>
+              Date: {dateFormat.format(new Date(selectedEvent?.date as string))}
+            </Text>
+
+            {/* Ticket Quantity Input */}
+            <Text style={styles.ticketLabel}>Number of Tickets:</Text>
+            <View style={styles.productAmount}>
+              <TouchableOpacity
+                style={{
+                  ...styles.amountButton,
+                  opacity: isDecrementDisable ? 0.5 : 1,
+                }}
+                onPress={onDecrement}
+                disabled={isDecrementDisable}
+              >
+                <Text style={styles.amountButtonText}>-</Text>
+              </TouchableOpacity>
+              <TextInput
+                style={styles.ticketInput}
+                keyboardType='numeric'
+                placeholder='Enter quantity'
+                value={ticketQuantity.toString()}
+                onChangeText={(value) =>
+                  setTicketQuantity(
+                    Math.max(
+                      0,
+                      Math.min(
+                        Number(value),
+                        selectedEvent?.numberOfTickets ?? 0
+                      )
+                    )
+                  )
+                }
+              />
+              <TouchableOpacity
+                style={{
+                  ...styles.amountButton,
+                  opacity: isIncrementDisable ? 0.5 : 1,
+                }}
+                onPress={onIncrement}
+                disabled={isIncrementDisable}
+              >
+                <Text style={styles.amountButtonText}>+</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+        <TouchableOpacity
+          style={styles.continueButton}
+          disabled={ticketQuantity < 1}
+          onPress={() =>
+            purchaseTickets(ticketQuantity, selectedEvent?.id as number)
+          }
+        >
+          <Text style={styles.continueButtonText}>Get tickets</Text>
+        </TouchableOpacity>
       </View>
-
-      <View style={styles.contentContainer}>
-        {/* Event Name */}
-        <Text style={styles.eventName}>{selectedEvent?.name}</Text>
-
-        {/* Event Description */}
-        <Text style={styles.eventDescription}>
-          {selectedEvent?.description}
-        </Text>
-
-        {/* Event Date */}
-        <Text style={styles.eventDate}>
-          Date: {dateFormat.format(new Date(selectedEvent?.date as string))}
-        </Text>
-
-        {/* Ticket Quantity Input */}
-        <Text style={styles.ticketLabel}>Number of Tickets:</Text>
-        <View style={styles.productAmount}>
-          <TouchableOpacity
-            style={{
-              ...styles.amountButton,
-              opacity: isDecrementDisable ? 0.5 : 1,
-            }}
-            onPress={onDecrement}
-            disabled={isDecrementDisable}
-          >
-            <Text style={styles.amountButtonText}>-</Text>
-          </TouchableOpacity>
-          <TextInput
-            style={styles.ticketInput}
-            keyboardType='numeric'
-            placeholder='Enter quantity'
-            value={ticketQuantity.toString()}
-            onChangeText={(value) => setTicketQuantity(Number(value))}
-          />
-          <TouchableOpacity
-            style={{
-              ...styles.amountButton,
-              opacity: isIncrementDisable ? 0.5 : 1,
-            }}
-            onPress={onIncrement}
-            disabled={isIncrementDisable}
-          >
-            <Text style={styles.amountButtonText}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <TouchableOpacity
-        style={styles.continueButton}
-        disabled={ticketQuantity < 1}
-        onPress={() =>
-          purchaseTickets(ticketQuantity, selectedEvent?.id as number)
-        }
-      >
-        <Text style={styles.continueButtonText}>Get tickets</Text>
-      </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 // TODO: Create a styles.ts file
 const styles = StyleSheet.create({
+  flex: { flex: 1 },
   container: {
     flex: 1,
     backgroundColor: Colors.background,
@@ -116,11 +132,10 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     position: "absolute",
-    bottom: 16,
-    left: 16,
-    right: 16,
+    bottom: 0,
+    left: 0,
+    right: 0,
     backgroundColor: Colors.primary,
-    borderRadius: 8,
     padding: 16,
     alignItems: "center",
   },
