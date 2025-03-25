@@ -7,10 +7,6 @@ export interface Event {
   price: number;
 }
 
-export interface EventCheckout extends Event {
-  amount: number;
-}
-
 export interface Order {
   id: number;
   code: string;
