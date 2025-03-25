@@ -5,8 +5,7 @@ import { RootStackParamList } from "@/types/navigation";
 
 import React from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { NavigationProp } from "@react-navigation/native";
-import { useNavigation } from "expo-router";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 interface Props {
   item: Event;
