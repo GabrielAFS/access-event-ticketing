@@ -7,6 +7,7 @@ export const EVENTS_QUERY = gql`
       name
       description
       numberOfTickets
+      date
       price
     }
   }
