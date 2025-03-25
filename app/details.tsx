@@ -49,7 +49,12 @@ export default function Checkout() {
             <Text style={styles.mainTitle}>{selectedEvent?.name}</Text>
             <Text style={styles.text}>{selectedEvent?.description}</Text>
             <Text style={styles.textBold}>
-              Date: {dateFormat.format(new Date(selectedEvent?.date as string))}
+              Date:{" "}
+              {dateFormat.format(
+                selectedEvent?.date
+                  ? new Date(selectedEvent?.date as string)
+                  : new Date()
+              )}
             </Text>
             <Text style={styles.blackText}>Number of Tickets:</Text>
             <View style={styles.rowAlignedCenter}>
