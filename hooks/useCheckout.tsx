@@ -3,19 +3,13 @@ import { CheckoutContext } from "@/context/checkout";
 import { RootStackParamList } from "@/types/navigation";
 import { EVENTS_QUERY, ORDER_MUTATION } from "@/graphql/queries";
 
-import React, { useContext, useMemo, useState } from "react";
+import React, { PropsWithChildren, useContext, useMemo, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useNavigation } from "expo-router";
 import { NavigationProp } from "@react-navigation/core";
 import { Alert } from "react-native";
 
-interface CheckoutProviderProps {
-  children: React.ReactNode;
-}
-
-export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
-  children,
-}) => {
+export const CheckoutProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const [createOrder] = useMutation(ORDER_MUTATION);
