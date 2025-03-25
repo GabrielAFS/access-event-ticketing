@@ -61,7 +61,7 @@ export default Card;
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    backgroundColor: Colors.background,
+    backgroundColor: "#eee",
     borderRadius: 8,
     shadowColor: Colors.black,
     shadowOpacity: 0.2,
