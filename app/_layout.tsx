@@ -11,6 +11,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name='index' />
           <Stack.Screen name='details' />
+          <Stack.Screen name='success_purchase' />
         </Stack>
       </CheckoutProvider>
     </ApolloProvider>
