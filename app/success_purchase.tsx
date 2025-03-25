@@ -5,6 +5,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { NavigationProp } from "@react-navigation/core";
 import { useNavigation } from "expo-router";
+import { Colors } from "@/constants/Colors";
 
 const SuccessPurchaseScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -45,13 +46,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    backgroundColor: Colors.background,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "#28a745",
+    color: Colors.primary,
   },
   infoContainer: {
     marginBottom: 15,
@@ -60,12 +61,12 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#6c757d",
+    color: Colors.text,
   },
   value: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#343a40",
+    color: Colors.title,
   },
   banner: {
     maxHeight: 300,
@@ -77,13 +78,13 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     right: 16,
-    backgroundColor: "#4caf50",
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     padding: 16,
     alignItems: "center",
   },
   continueButtonText: {
-    color: "#fff",
+    color: Colors.background,
     fontSize: 18,
     fontWeight: "bold",
   },

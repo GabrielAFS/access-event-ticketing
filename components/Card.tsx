@@ -1,5 +1,6 @@
 import { Event } from "@/types";
 import { dateFormat } from "@/utils/date";
+import { Colors } from "@/constants/Colors";
 import useCheckout from "@/hooks/useCheckout";
 import { RootStackParamList } from "@/types/navigation";
 
@@ -27,7 +28,9 @@ const Card: React.FC<Props> = ({ item }) => {
     <View style={styles.container}>
       {isSoldOut && (
         <View style={styles.soldOutContainer}>
-          <Text style={{ ...styles.productPriceText, color: "white" }}>
+          <Text
+            style={{ ...styles.productPriceText, color: Colors.background }}
+          >
             SOLD OUT
           </Text>
         </View>
@@ -58,9 +61,9 @@ export default Card;
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.background,
     borderRadius: 8,
-    shadowColor: "#000",
+    shadowColor: Colors.black,
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 20,
-    backgroundColor: "#f64f6bbe",
+    backgroundColor: Colors.badge,
   },
   productCard: {
     flexDirection: "row",
@@ -99,39 +102,22 @@ const styles = StyleSheet.create({
   },
   productDescription: {
     fontSize: 14,
-    color: "#666",
+    color: Colors.text,
     marginBottom: 4,
   },
   productPrice: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#4caf50",
+    color: Colors.primary,
   },
   productPriceText: {
     fontSize: 14,
     fontWeight: "normal",
-    color: "#666",
+    color: Colors.text,
   },
   productAmount: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  amountButton: {
-    width: 30,
-    height: 30,
-    backgroundColor: "#ffa726",
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  amountButtonText: {
-    color: "#fff",
-    fontSize: 18,
-  },
-  amountText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginHorizontal: 16,
   },
   footer: {
     flexDirection: "row",

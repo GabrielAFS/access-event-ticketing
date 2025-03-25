@@ -10,6 +10,7 @@ import {
   Image,
   TextInput,
 } from "react-native";
+import { Colors } from "@/constants/Colors";
 
 export default function Checkout() {
   const { selectedEvent, purchaseTickets } = useCheckout();
@@ -97,7 +98,7 @@ export default function Checkout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: Colors.background,
   },
   contentContainer: {
     paddingHorizontal: 16,
@@ -111,13 +112,13 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     right: 16,
-    backgroundColor: "#4caf50",
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     padding: 16,
     alignItems: "center",
   },
   continueButtonText: {
-    color: "#fff",
+    color: Colors.background,
     fontSize: 18,
     fontWeight: "bold",
   },
@@ -131,24 +132,28 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 8,
+    color: Colors.title,
   },
   eventDescription: {
     fontSize: 16,
-    color: "#555",
+    color: Colors.text,
     marginBottom: 8,
   },
   eventDate: {
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 16,
+    color: Colors.title,
   },
   ticketLabel: {
     fontSize: 16,
     marginBottom: 8,
+    color: Colors.title,
   },
   ticketInput: {
     padding: 8,
     fontSize: 16,
+    color: Colors.title,
   },
   productAmount: {
     flexDirection: "row",
@@ -157,13 +162,13 @@ const styles = StyleSheet.create({
   amountButton: {
     width: 30,
     height: 30,
-    backgroundColor: "#4caf50",
+    backgroundColor: Colors.primary,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
   },
   amountButtonText: {
-    color: "#fff",
+    color: Colors.background,
     fontSize: 18,
   },
   amountText: {

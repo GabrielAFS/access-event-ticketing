@@ -5,6 +5,7 @@ import { EVENTS_QUERY } from "@/graphql/queries";
 
 import { FlatList, StyleSheet, View } from "react-native";
 import { useQuery } from "@apollo/client";
+import { Colors } from "@/constants/Colors";
 
 export default function Index() {
   const { data, loading, called } = useQuery<{ events: Event[] }>(EVENTS_QUERY);
@@ -29,7 +30,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f7f7f7",
+    backgroundColor: Colors.background,
   },
   contentContainerStyle: { paddingHorizontal: 16, paddingBottom: 100 },
   productList: {
@@ -41,13 +42,13 @@ const styles = StyleSheet.create({
     bottom: 16,
     left: 16,
     right: 16,
-    backgroundColor: "#4caf50",
+    backgroundColor: Colors.primary,
     borderRadius: 8,
     padding: 16,
     alignItems: "center",
   },
   continueButtonText: {
-    color: "#fff",
+    color: Colors.background,
     fontSize: 18,
     fontWeight: "bold",
   },
