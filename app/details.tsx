@@ -2,12 +2,12 @@ import Button from "@/components/Button";
 import { dateFormat } from "@/utils/date";
 import { Colors } from "@/constants/Colors";
 import useCheckout from "@/hooks/useCheckout";
+import RoundedButton from "@/components/RoundedButton";
 
 import { useState } from "react";
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Image,
   TextInput,
@@ -63,16 +63,11 @@ export default function Checkout() {
             {/* Ticket Quantity Input */}
             <Text style={styles.ticketLabel}>Number of Tickets:</Text>
             <View style={styles.productAmount}>
-              <TouchableOpacity
-                style={{
-                  ...styles.amountButton,
-                  opacity: isDecrementDisable ? 0.5 : 1,
-                }}
+              <RoundedButton
+                title='-'
                 onPress={onDecrement}
                 disabled={isDecrementDisable}
-              >
-                <Text style={styles.amountButtonText}>-</Text>
-              </TouchableOpacity>
+              />
               <TextInput
                 style={styles.ticketInput}
                 keyboardType='numeric'
@@ -90,16 +85,11 @@ export default function Checkout() {
                   )
                 }
               />
-              <TouchableOpacity
-                style={{
-                  ...styles.amountButton,
-                  opacity: isIncrementDisable ? 0.5 : 1,
-                }}
+              <RoundedButton
+                title='+'
                 onPress={onIncrement}
                 disabled={isIncrementDisable}
-              >
-                <Text style={styles.amountButtonText}>+</Text>
-              </TouchableOpacity>
+              />
             </View>
           </View>
         </ScrollView>
@@ -165,18 +155,6 @@ const styles = StyleSheet.create({
   productAmount: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  amountButton: {
-    width: 30,
-    height: 30,
-    backgroundColor: Colors.primary,
-    borderRadius: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  amountButtonText: {
-    color: Colors.background,
-    fontSize: 18,
   },
   amountText: {
     fontSize: 18,
