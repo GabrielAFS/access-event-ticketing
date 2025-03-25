@@ -81,22 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.title,
   },
-
-  soldOutContainer: {
-    position: "absolute",
-    right: 10,
-    top: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 20,
-    backgroundColor: Colors.badge,
-    zIndex: 999,
-  },
-  soldOutText: {
-    fontSize: 16,
-    fontWeight: "normal",
-    color: Colors.background,
-  },
 });
 
 export default styles;

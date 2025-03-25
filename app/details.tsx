@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { dateFormat } from "@/utils/date";
+import SoldOut from "@/components/SoldOut";
 import useCheckout from "@/hooks/useCheckout";
 import RoundedButton from "@/components/RoundedButton";
 
@@ -32,11 +33,7 @@ export default function Checkout() {
       <View style={styles.container}>
         <ScrollView style={styles.flex} keyboardDismissMode='interactive'>
           <View>
-            {isSoldOut && (
-              <View style={styles.soldOutContainer}>
-                <Text style={styles.soldOutText}>SOLD OUT</Text>
-              </View>
-            )}
+            {isSoldOut && <SoldOut />}
             <Image
               source={{
                 uri: "https://shakopee.org/wp-content/uploads/2019/09/event-placeholder-e1569596788649.jpg",

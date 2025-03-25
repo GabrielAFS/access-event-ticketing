@@ -1,3 +1,4 @@
+import SoldOut from "./SoldOut";
 import { Event } from "@/types";
 import { dateFormat } from "@/utils/date";
 import { Colors } from "@/constants/Colors";
@@ -26,15 +27,7 @@ const Card: React.FC<Props> = ({ item }) => {
 
   return (
     <View style={styles.container}>
-      {isSoldOut && (
-        <View style={styles.soldOutContainer}>
-          <Text
-            style={{ ...styles.productPriceText, color: Colors.background }}
-          >
-            SOLD OUT
-          </Text>
-        </View>
-      )}
+      {isSoldOut && <SoldOut size='sm' />}
       <Pressable onPress={handlePress}>
         <View style={styles.productCard}>
           <View style={styles.productInfo}>
@@ -70,15 +63,6 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: 16,
     marginBottom: 16,
-  },
-  soldOutContainer: {
-    position: "absolute",
-    right: 0,
-    top: 0,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 20,
-    backgroundColor: Colors.badge,
   },
   productCard: {
     flexDirection: "row",
