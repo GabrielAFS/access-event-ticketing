@@ -1,3 +1,4 @@
+import { dateFormat } from "@/utils/date";
 import useCheckout from "@/hooks/useCheckout";
 
 import { useState } from "react";
@@ -42,7 +43,9 @@ export default function Checkout() {
         </Text>
 
         {/* Event Date */}
-        <Text style={styles.eventDate}>Date: {selectedEvent?.date}</Text>
+        <Text style={styles.eventDate}>
+          Date: {dateFormat.format(new Date(selectedEvent?.date as string))}
+        </Text>
 
         {/* Ticket Quantity Input */}
         <Text style={styles.ticketLabel}>Number of Tickets:</Text>
