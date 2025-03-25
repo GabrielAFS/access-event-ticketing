@@ -14,7 +14,7 @@ export const EVENTS_QUERY = gql`
 `;
 
 export const ORDER_MUTATION = gql`
-  mutation {
+  mutation CreateOrder($tickets: Int!, $eventId: Int!) {
     createOrder(
       createOrderInput: { numberOfTickets: $tickets, eventId: $eventId }
     ) {

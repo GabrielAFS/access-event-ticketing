@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 export default function Checkout() {
-  const { selectedEvent } = useCheckout();
+  const { selectedEvent, purchaseTickets } = useCheckout();
   const [ticketQuantity, setTicketQuantity] = useState<number>(0);
 
   const isSoldOut = selectedEvent?.numberOfTickets === 0;
@@ -83,6 +83,9 @@ export default function Checkout() {
       <TouchableOpacity
         style={styles.continueButton}
         disabled={ticketQuantity < 1}
+        onPress={() =>
+          purchaseTickets(ticketQuantity, selectedEvent?.id as number)
+        }
       >
         <Text style={styles.continueButtonText}>Get tickets</Text>
       </TouchableOpacity>
