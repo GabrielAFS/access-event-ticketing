@@ -41,7 +41,7 @@ const SuccessPurchaseScreen = () => {
 
       <Button
         title='Back to Events list'
-        onPress={() => navigation.navigate("index")}
+        onPress={() => navigation.reset({ routes: [{ name: "index" }] })} // Reset stack to prevent go back to this screen
       />
     </View>
   );

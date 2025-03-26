@@ -25,7 +25,7 @@ export const CheckoutProvider: React.FC<PropsWithChildren> = ({ children }) => {
       refetchQueries: [EVENTS_QUERY],
       onCompleted: (data) => {
         setPurchasedOrder(data.createOrder);
-        navigation.navigate("success_purchase");
+        navigation.reset({ routes: [{ name: "success_purchase" }] });
       },
       onError: (error) => Alert.alert(error.name, error.message),
     });
